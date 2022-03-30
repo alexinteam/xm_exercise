@@ -1,0 +1,55 @@
+version: '3'
+
+
+services:
+
+    web:
+        build:
+            context: .docker/nginx
+        volumes:
+            - ./:/var/www
+        ports:
+            - "80:80"
+        extra_hosts:
+            - "dockerhost:10.0.75.1"
+
+    app:
+        build:
+            context: .docker/php
+            args:
+                PUID: "1000"
+                PHP_INSTALL_XDEBUG: "true"
+                PHP_XDEBUG_PORT: "9001"
+        volumes:
+            - ./:/var/www
+            - ./.docker/php/xdebug_custom.ini:/usr/local/etc/php/conf.d/55-xdebug.ini
+        environment:
+            - "PHP_IDE_CONFIG=serverName=localhost"
+            - "COMPOSER_MEMORY_LIMIT=-1"
+        user: www-data
+        extra_hosts:
+            - "dockerhost:10.0.75.1"
+
+    database:
+        image: postgres
+        environment:
+            - "POSTGRES_DB=test"
+            - "POSTGRES_USER=postgres"
+            - "POSTGRES_PASSWORD=postgres"
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./:/var/www
+
+    redis:
+        image: redis:alpine
+        ports:
+            - "6379:6379"
+
+    node:
+        volumes:
+            - ./:/var/www
+        build:
+            context: .docker/node
+        ports:
+            - "3000:3000"
