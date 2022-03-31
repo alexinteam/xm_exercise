@@ -1,15 +1,25 @@
+## Start
 docker-compose up -d 
 
 docker-compose exec app composer install
 
 docker-compose exec app php artisan key:generate
 
-Nvigate to ``http://localhost/form``
+Navigate to ``http://localhost/form``
+
+
+### running tests
+docker-compose exec app php artisan test
+
+### running test coverage
+
+docker-compose exec app php artisan test --coverage-html tests/reports/coverage
 
 ## NOTE!!
-in ``.env`` ``MAIL_MAILER=log`` so mail is just store to log
+* in ``.env`` ``MAIL_MAILER=log`` so mail is just store to log ``storage/logs/laravel.log``
 
-if needed real transport ``MAIL_MAILER=`` should be configured to real transport smtp, mailgun etc....see ``config/mail.php``
+* if needed real transport ``MAIL_MAILER=`` should be configured to real transport smtp if needed, mailgun etc....see ``config/mail.php``
 
-## NOTE!!
-keys are stored in .env to simplify check. In real app it should be hidden, and will be removed in few days after check
+* keys are stored in .env to simplify check. In real app it should be hidden, and **will be removed in few days after check**
+
+* **DID NOT** cover Laravel Build-in classes

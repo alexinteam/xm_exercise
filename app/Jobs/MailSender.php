@@ -52,4 +52,12 @@ class MailSender implements ShouldQueue
             return false;
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
 }
