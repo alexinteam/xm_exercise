@@ -36,7 +36,7 @@ return [
     ],
 
     'nasdaqListings' => [
-        'url' =>  env('NASDAQ_LISTED_JSON')
+        'url' =>  env('NASDAQ_LISTED_JSON_URL')
     ]
 
 ];

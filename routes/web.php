@@ -16,3 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/form', [
+    'as' => 'form_page',
+    'uses' => 'App\Http\Controllers\SymbolController@form'
+]);
+
+Route::post('/form', [
+    'as' => 'submit_form',
+    'uses' => 'App\Http\Controllers\SymbolController@submitForm'
+]);
+
+Route::get('/table/{symbol}', [
+    'as' => 'table_page',
+    'uses' => 'App\Http\Controllers\HistoricalController@table'
+]);
