@@ -15,6 +15,8 @@ docker-compose exec app php artisan test
 
 docker-compose exec app php artisan test --coverage-html tests/reports/coverage
 
+view in ``tests/reports/coverage/index.html``
+
 ## NOTE!!
 * in ``.env`` ``MAIL_MAILER=log`` so mail is just store to log ``storage/logs/laravel.log``
 
